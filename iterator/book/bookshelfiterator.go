@@ -8,7 +8,7 @@ type BookShelfIterator struct {
 }
 
 func (bsItor *BookShelfIterator) HasNext() bool {
-	return bsItor.index <= bsItor.bookShelf.Length()
+	return bsItor.index < bsItor.bookShelf.Length()
 }
 
 func (bsItor *BookShelfIterator) Next() (interface{}, error) {
@@ -18,7 +18,7 @@ func (bsItor *BookShelfIterator) Next() (interface{}, error) {
 	}
 
 	bsItor.index++
-	return &element, nil
+	return element, nil
 }
 
 var _ iterator.Iterator = (*BookShelfIterator)(nil)

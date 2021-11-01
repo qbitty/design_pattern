@@ -7,11 +7,18 @@ import (
 )
 
 type BookShelf struct {
-	books []Book
+	books []*Book
 	last  int
 }
 
-func (bs *BookShelf) Append(book Book) {
+func New(compcity int) *BookShelf {
+	return &BookShelf{
+		books: make([]*Book, compcity),
+		last:  0,
+	}
+}
+
+func (bs *BookShelf) Append(book *Book) {
 	bs.books[bs.last] = book
 	bs.last++
 }
@@ -25,7 +32,7 @@ func (bs *BookShelf) BookAt(index int) (*Book, error) {
 		return nil, errors.New("index our of bound")
 	}
 
-	return &bs.books[index], nil
+	return bs.books[index], nil
 }
 
 func (bs *BookShelf) Length() int {
